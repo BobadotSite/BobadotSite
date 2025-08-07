@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bobadot - The Penguin Pal Who Brings Smiles</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: black;
+        }
+
+        /* Video Background - NO BLACK TINT */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 1; /* Full opacity, no dimming */
+        }
+
+        /* Dark overlay for top section to make text more visible */
+        .video-background::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent);
+            z-index: 1;
+        }
+
+        /* PINK Floating particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255, 182, 193, 0.8) 0%, rgba(255, 105, 180, 0.6) 50%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
+            25% { transform: translateY(-20px) rotate(90deg); opacity: 1; }
+            50% { transform: translateY(-40px) rotate(180deg); opacity: 0.9; }
+            75% { transform: translateY(-20px) rotate(270deg); opacity: 1; }
+        }
+
+        /* Header with Logo only - TRANSPARENT by default */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: transparent; /* Completely transparent initially */
+            backdrop-filter: none;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            height: 60px;
+            max-width: 200px;
+            object-fit: contain;
+        }
+
+        /* Text positioned just below the logo */
+        .top-text {
+            position: absolute;
+            top: 120px; /* Just below the header/logo */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1001;
+            color: white;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .top-text h1 {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            line-height: 1.3;
+            color: white;
+        }
+
+        .top-text h1 .brings-smiles {
+            font-size: 2.8rem;
+        }
+
+        .top-text p {
+            font-size: 1.4rem;
+            font-weight: bold;
+            line-height: 1.3;
+            color: white;
+        }
+
+        /* Hero Section - reduced content */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 5;
+            margin-bottom: 120px; /* Space for bottom signup section */
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Bottom signup section */
+        .signup-section {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 10;
+            color: white;
+        }
+
+        .deal-text {
+            font-size: 1.0rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .email-signup {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin-bottom: 15px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .email-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px 0 0 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            border-right: none;
+        }
+
+        .email-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .signup-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 0 50px 50px 0;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            background: linear-gradient(45deg, #FF69B4, #87CEEB, #FF69B4);
+            background-size: 200% 200%;
+            animation: breathe 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @keyframes breathe {
+            0% { 
+                background-position: 0% 50%;
+                transform: scale(1);
+                box-shadow: 0 5px 20px rgba(255, 105, 180, 0.3);
+            }
+            50% { 
+                background-position: 100% 50%;
+                transform: scale(1.05);
+                box-shadow: 0 8px 30px rgba(135, 206, 235, 0.4);
+            }
+            100% { 
+                background-position: 0% 50%;
+                transform: scale(1);
+                box-shadow: 0 5px 20px rgba(255, 105, 180, 0.3);
+            }
+        }
+
+        .signup-btn:hover {
+            transform: scale(1.08) !important;
+            box-shadow: 0 10px 40px rgba(255, 105, 180, 0.6);
+        }
+
+        .kickstarter-text {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            font-style: italic;
+        }
+
+        /* Content Sections */
+        .content {
+            background: white;
+            padding: 100px 50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section {
+            max-width: 1200px;
+            margin: 0 auto 100px;
+            text-align: center;
+            color: #333;
+            padding: 60px 40px;
+        }
+
+        /* Talk and Support Section */
+        .talk-support-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .talk-support-left {
+            flex: 2;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .talk-support-right {
+            flex: 3;
+            text-align: center;
+        }
+
+        .talk-support-title {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin-bottom: 30px;
+        }
+
+        .talk-support-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+            opacity: 1;
+            margin: 0;
+            text-align: center;
+        }
+
+        .talk-support-text strong {
+            color: #00ff7f;
+            font-weight: bold;
+        }
+
+        .talk-support-gif {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Level Up Section */
+        .feature-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-left {
+            flex: 3;
+            text-align: center;
+        }
+
+        .feature-right {
+            flex: 2;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .feature-title {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin-bottom: 30px;
+        }
+
+        .feature-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+            opacity: 1;
+            margin: 0;
+            text-align: center;
+        }
+
+        .feature-text strong {
+            color: #00ff7f;
+            font-weight: bold;
+        }
+
+        .feature-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Role Play Section */
+        .roleplay-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .roleplay-left {
+            flex: 2;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .roleplay-right {
+            flex: 3;
+            text-align: center;
+        }
+
+        .roleplay-title {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin-bottom: 30px;
+        }
+
+        .roleplay-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+            opacity: 1;
+            margin: 0;
+            text-align: center;
+        }
+
+        .roleplay-gif {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Language Section */
+        .language-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .language-left {
+            flex: 3;
+            text-align: center;
+        }
+
+        .language-right {
+            flex: 2;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .language-title {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin-bottom: 30px;
+        }
+
+        .language-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+            opacity: 1;
+            margin: 0 0 20px 0;
+            text-align: center;
+        }
+
+        .language-list {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #777;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .language-gif {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Music Section */
+        .music-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .music-left {
+            flex: 2;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .music-right {
+            flex: 3;
+            text-align: center;
+        }
+
+        .music-title {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin-bottom: 30px;
+        }
+
+        .music-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+            opacity: 1;
+            margin: 0;
+            text-align: center;
+        }
+
+        .music-gif {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .deal-text { font-size: 1.2rem; }
+            .email-signup { flex-direction: column; gap: 10px; }
+            .email-input { border-radius: 25px; border-right: 2px solid rgba(255, 255, 255, 0.3); }
+            .signup-btn { border-radius: 25px; }
+            header { padding: 15px 20px; }
+            .logo { height: 40px; }
+            .content { padding: 50px 20px; }
+            .section { padding: 40px 20px; }
+            
+            /* Top text responsive */
+            .top-text {
+                top: 90px; /* Adjusted for mobile header */
+                left: 50%;
+                transform: translateX(-50%);
+                white-space: nowrap;
+                text-align: center;
+            }
+            
+            .top-text h1 {
+                font-size: 1.2rem;
+                margin-bottom: 8px;
+            }
+            
+            .top-text h1 .brings-smiles {
+                font-size: 1.6rem;
+            }
+            
+            .top-text p {
+                font-size: 1.0rem;
+            }
+            
+            /* Talk and Support Responsive */
+            .talk-support-container {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .talk-support-left {
+                text-align: center;
+            }
+            
+            .talk-support-title {
+                max-width: 300px;
+                margin-bottom: 20px;
+            }
+            
+            .talk-support-text {
+                font-size: 1.1rem;
+                text-align: center;
+            }
+            
+            .talk-support-gif {
+                max-width: 350px;
+            }
+
+            /* Feature Responsive */
+            .feature-container {
+                flex-direction: column-reverse;
+                gap: 40px;
+            }
+            
+            .feature-title {
+                max-width: 300px;
+                margin-bottom: 20px;
+            }
+            
+            .feature-text {
+                font-size: 1.1rem;
+                text-align: center;
+            }
+            
+            .feature-image {
+                max-width: 350px;
+            }
+
+            /* Role Play Responsive */
+            .roleplay-container {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .roleplay-left {
+                text-align: center;
+            }
+            
+            .roleplay-title {
+                max-width: 300px;
+                margin-bottom: 20px;
+            }
+            
+            .roleplay-text {
+                font-size: 1.1rem;
+                text-align: center;
+            }
+            
+            .roleplay-gif {
+                max-width: 350px;
+            }
+
+            /* Language Responsive */
+            .language-container {
+                flex-direction: column-reverse;
+                gap: 40px;
+            }
+            
+            .language-title {
+                max-width: 300px;
+                margin-bottom: 20px;
+            }
+            
+            .language-text {
+                font-size: 1.1rem;
+                text-align: center;
+            }
+            
+            .language-list {
+                font-size: 1rem;
+                text-align: center;
+            }
+            
+            .language-gif {
+                max-width: 350px;
+            }
+
+            /* Music Responsive */
+            .music-container {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .music-left {
+                text-align: center;
+            }
+            
+            .music-title {
+                max-width: 300px;
+                margin-bottom: 20px;
+            }
+            
+            .music-text {
+                font-size: 1.1rem;
+                text-align: center;
+            }
+            
+            .music-gif {
+                max-width: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="./video/dotvideo2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Header with Logo Only -->
+    <header>
+        <nav>
+            <img src="./photo/Bbd .png" alt="Bobadot Logo" class="logo">
+        </nav>
+    </header>
+
+    <!-- Top Text positioned just below the logo -->
+    <div class="top-text">
+        <h1>The Penguin Pal Who brings smiles to everyone</h1>
+        <p>Because every toy has a heart.</p>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <!-- Content moved to top-text section -->
+        </div>
+
+        <!-- Bottom Signup Section -->
+        <div class="signup-section">
+            <div class="deal-text">Unlock the Limited Exclusive Launch Deal – From <strong>$99</strong> (Up to <strong>28%</strong> OFF)</div>
+            <div class="email-signup">
+                <input type="email" class="email-input" placeholder="Enter your email address">
+                <button class="signup-btn">Signup Now!</button>
+            </div>
+            <div class="kickstarter-text">Coming soon on Kickstarter</div>
+        </div>
+    </section>
+
+    <!-- Content Sections -->
+    <div class="content">
+        <!-- Talk and Support Section -->
+        <section class="section" id="features">
+            <div class="talk-support-container">
+                <div class="talk-support-left">
+                    <img src="./photo/talksupporttitle.png" alt="Talk and Support" class="talk-support-title">
+                    <p class="talk-support-text">
+                        Dot remembers your name and conversations, and it is the best emotional companion, <strong>it always wants to listen to you.</strong> Dot's story and content are thoughtfully designed to be child-safe and emotionally intelligent to ensure a consistent and caring experience.
+                    </p>
+                </div>
+                <div class="talk-support-right">
+                    <img src="./photo/talksupportgif.webp" alt="Talk and Support Demo" class="talk-support-gif">
+                </div>
+            </div>
+        </section>
+
+        <!-- Level Up Your Dot Section -->
+        <section class="section" id="levelup">
+            <div class="feature-container">
+                <div class="feature-left">
+                    <img src="./photo/levelup.avif" alt="Level Up Feature" class="feature-image">
+                </div>
+                <div class="feature-right">
+                    <img src="./photo/leveluptitle.png" alt="Level Up Your Dot" class="feature-title">
+                    <p class="feature-text">
+                        Dot isn't just a toy, it's designed with a gamer's mindset. Built like your favorite RPG companion, Dot levels up the more you talk, play and spend time together. Every interaction earns "XP," unlocking new personality traits. <strong>How will your Dot be? You decide.</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Role Play Section -->
+        <section class="section" id="roleplay">
+            <div class="roleplay-container">
+                <div class="roleplay-left">
+                    <img src="./photo/roleplaytitle.png" alt="Role Play Mode" class="roleplay-title">
+                    <p class="roleplay-text">
+                        Need a break from the real world? Dot transforms into characters like a pirate, explorer, chef, teacher and more. Role Play Mode offers an immersive experience where you can explore different jobs and movie-like scenarios. New themes are added every week, making it fun for both kids and adults.
+                    </p>
+                </div>
+                <div class="roleplay-right">
+                    <img src="./photo/roleplaygif.webp" alt="Role Play Demo" class="roleplay-gif">
+                </div>
+            </div>
+        </section>
+
+        <!-- Language Learning Section -->
+        <section class="section" id="language">
+            <div class="language-container">
+                <div class="language-left">
+                    <img src="./photo/roleplaygif.webp" alt="Language Learning Demo" class="language-gif">
+                </div>
+                <div class="language-right">
+                    <img src="./photo/roleplaytitle.png" alt="Dot Helps You Speak" class="language-title">
+                    <p class="language-text">
+                        If you're learning a new language and have no one to practice with, Dot is here to help. Dot is more than just a plush companion — it's a smart, interactive buddy designed to speak the language you're learning. Choose your target language, and Dot will talk to you in that language every day. The more you speak, the more Dot helping you to build real conversation skills through natural, friendly interaction.
+                    </p>
+                    <p class="language-list">
+                        <strong>Current available languages:</strong><br>
+                        English, Spanish, German, Japanese, Mandarin, Thai
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Music Section -->
+        <section class="section" id="music">
+            <div class="music-container">
+                <div class="music-left">
+                    <img src="./photo/musictitle.png" alt="Relaxing Music" class="music-title">
+                    <p class="music-text">
+                        Whether you're feeling stressed, having trouble sleeping, or just winding down in normal mode, pressing Dot's legs will play soothing lullabies to help you relax and rest easy.
+                    </p>
+                </div>
+                <div class="music-right">
+                    <img src="./photo/musicgif.webp" alt="Music Demo" class="music-gif">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Floating particles animation
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 4 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            
+            document.getElementById('particles').appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 8000);
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 300);
+        
+        // Initial particles
+        for(let i = 0; i < 20; i++) {
+            setTimeout(createParticle, i * 100);
+        }
+
+        // Header scroll effect - changes to #53a4c6 when scrolling
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(83, 164, 198, 0.9)'; // #53a4c6 with transparency
+                header.style.backdropFilter = 'blur(10px)';
+                header.style.padding = '15px 50px';
+            } else {
+                header.style.background = 'transparent';
+                header.style.backdropFilter = 'none';
+                header.style.padding = '20px 50px';
+            }
+        });
+
+        // Email signup functionality
+        document.querySelector('.signup-btn').addEventListener('click', function() {
+            const email = document.querySelector('.email-input').value;
+            if (email && email.includes('@')) {
+                alert('Thank you! We\'ll notify you when Dot launches on Kickstarter!');
+                document.querySelector('.email-input').value = '';
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        });
+
+        // Enter key for email signup
+        document.querySelector('.email-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.signup-btn').click();
+            }
+        });
+    </script>
+</body>
+</html>
