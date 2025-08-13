@@ -105,7 +105,8 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        .email-signup {
+        /* MailChimp Form Styling */
+        .mc-form-wrapper {
             display: flex;
             align-items: center;
             gap: 0;
@@ -114,7 +115,7 @@
             justify-content: center;
         }
 
-        .email-input {
+        .mc-email-input {
             flex: 1;
             padding: 15px 20px;
             border: 2px solid rgba(255, 255, 255, 0.3);
@@ -125,7 +126,7 @@
             border-right: none;
         }
 
-        .signup-btn {
+        .mc-submit-btn {
             padding: 15px 30px;
             border: none;
             border-radius: 0 50px 50px 0;
@@ -159,9 +160,27 @@
             }
         }
 
-        .signup-btn:hover {
+        .mc-submit-btn:hover {
             transform: scale(1.08) !important;
             box-shadow: 0 10px 40px rgba(255, 105, 180, 0.6);
+        }
+
+        /* Success/Error Messages */
+        .mc-response {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .mc-success {
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+        }
+
+        .mc-error {
+            background: rgba(244, 67, 54, 0.9);
+            color: white;
         }
 
         .kickstarter-text {
@@ -392,18 +411,18 @@
                 font-size: 1.2rem;
             }
 
-            .email-signup {
+            .mc-form-wrapper {
                 flex-direction: column;
                 gap: 10px;
             }
 
-            .email-input {
+            .mc-email-input {
                 border-radius: 25px;
                 border-right: 2px solid rgba(255, 255, 255, 0.3);
                 width: 100%;
             }
 
-            .signup-btn {
+            .mc-submit-btn {
                 border-radius: 25px;
                 width: 100%;
             }
@@ -458,13 +477,45 @@
                 <p class="hero-subtitle">A friend who listens, talks and our language partner</p>
             </div>
             
-            <!-- Signup Container Now On Image -->
+            <!-- Signup Container with MailChimp Integration -->
             <div class="signup-container">
                 <p class="signup-text">Sign up and save up to 50% on launch day</p>
-                <div class="email-signup">
-                    <input type="email" class="email-input" placeholder="Enter your email address">
-                    <button class="signup-btn">Signup Now!</button>
-                </div>
+                
+                <!-- MailChimp Form -->
+                <form action="https://bobadot.us3.list-manage.com/subscribe/post?u=6264709c5542130978ba9ce7d&amp;id=5c0ad2e828&amp;f_id=0090c8e0f0" 
+                      method="post" 
+                      id="mc-embedded-subscribe-form" 
+                      name="mc-embedded-subscribe-form" 
+                      class="validate" 
+                      target="_blank">
+                    
+                    <div class="mc-form-wrapper">
+                        <input type="email" 
+                               name="EMAIL" 
+                               class="mc-email-input" 
+                               id="mce-EMAIL" 
+                               placeholder="Enter your email address" 
+                               required>
+                        <button type="submit" 
+                                name="subscribe" 
+                                id="mc-embedded-subscribe" 
+                                class="mc-submit-btn">
+                            Signup Now!
+                        </button>
+                    </div>
+                    
+                    <!-- Bot protection field (hidden) -->
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                        <input type="text" name="b_6264709c5542130978ba9ce7d_5c0ad2e828" tabindex="-1" value="">
+                    </div>
+                    
+                    <!-- Response messages -->
+                    <div id="mce-responses" class="clear">
+                        <div class="mc-response mc-error" id="mce-error-response"></div>
+                        <div class="mc-response mc-success" id="mce-success-response"></div>
+                    </div>
+                </form>
+                
                 <p class="kickstarter-text">Coming soon on Kickstarter</p>
             </div>
         </div>
@@ -589,15 +640,32 @@
     </section>
 
     <script>
-        // Email signup functionality
-        document.querySelector('.signup-btn').addEventListener('click', function() {
-            const email = document.querySelector('.email-input').value;
-            if (email && email.includes('@')) {
-                alert('Thank you! We\'ll notify you when Dot launches on Kickstarter!');
-                document.querySelector('.email-input').value = '';
-            } else {
-                alert('Please enter a valid email address');
-            }
+        // Enhanced form submission handling
+        const form = document.getElementById('mc-embedded-subscribe-form');
+        const successMsg = document.getElementById('mce-success-response');
+        const errorMsg = document.getElementById('mce-error-response');
+        
+        // Handle form submission with AJAX (optional - for better UX)
+        form.addEventListener('submit', function(e) {
+            // The form will still submit to MailChimp in a new tab
+            // This just adds a nice confirmation message
+            setTimeout(() => {
+                const email = document.getElementById('mce-EMAIL').value;
+                if (email) {
+                    // Show success message
+                    successMsg.textContent = 'Thank you for signing up! Please check the new tab to complete your subscription.';
+                    successMsg.style.display = 'block';
+                    errorMsg.style.display = 'none';
+                    
+                    // Clear the form
+                    form.reset();
+                    
+                    // Hide message after 5 seconds
+                    setTimeout(() => {
+                        successMsg.style.display = 'none';
+                    }, 5000);
+                }
+            }, 500);
         });
 
         // Smooth scroll behavior
@@ -625,6 +693,18 @@
                 }
             });
         }
+    </script>
+
+    <!-- MailChimp form validation script -->
+    <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+    <script type="text/javascript">
+        (function($) {
+            window.fnames = new Array(); 
+            window.ftypes = new Array();
+            fnames[0]='EMAIL';
+            ftypes[0]='email';
+        }(jQuery));
+        var $mcj = jQuery.noConflict(true);
     </script>
 </body>
 </html>
