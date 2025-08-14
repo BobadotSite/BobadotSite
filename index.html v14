@@ -139,7 +139,6 @@
             max-width: 400px;
             width: 100%;
             text-align: center;
-            position: relative;
         }
 
         .modal-close {
@@ -916,7 +915,8 @@
         
         <!-- Features content wrapper -->
         <div class="features-content">
-            <!-- Talk and Support - FIXED: Correct image -->
+            
+            <!-- Talk and Support -->
             <div class="feature-container">
                 <div class="feature-box">
                     <img src="./photo/talksupporttitle.png" alt="Talk and Support" class="feature-title-img">
@@ -930,11 +930,291 @@
                 </div>
             </div>
 
-            <!-- Level Up (Reversed) - FIXED: Complete and correct -->
+            <!-- Level Up (Reversed) -->
             <div class="feature-container reverse">
                 <div class="feature-box">
                     <img src="./photo/leveluptitle.png" alt="Level Up Your Dot" class="feature-title-img">
                     <p class="feature-text">
                         Level Up Your Dot. Dot isn't just a toy, it's <strong>designed with a gamer's mindset</strong>.<br><br>
                         Built like your favorite RPG companion, Dot <strong>levels up</strong> the more you talk, play and spend time together. Every interaction <strong>earns "XP," unlocking new personality traits</strong>.<br><br>
-                        How will your Dot be? 
+                        How will your Dot be? <strong>You decide</strong>.
+                    </p>
+                </div>
+                <div class="feature-media">
+                    <img src="./photo/levelup.avif" alt="Level Up Demo" class="feature-gif">
+                </div>
+            </div>
+
+            <!-- Role Play -->
+            <div class="feature-container">
+                <div class="feature-box">
+                    <img src="./photo/roleplaytitle.png" alt="Role Play Mode" class="feature-title-img">
+                    <p class="feature-text">
+                        Need a break from the real world? Dot <strong>transforms into characters</strong> like a pirate, explorer, chef, teacher and more.<br><br>
+                        Role Play Mode offers an <strong>immersive experience</strong> where you can explore different jobs and movie-like scenarios. <strong>New themes are added every week</strong>, making it fun for both kids and adults.
+                    </p>
+                </div>
+                <div class="feature-media">
+                    <img src="./photo/roleplaygif.webp" alt="Role Play Demo" class="feature-gif">
+                </div>
+            </div>
+
+            <!-- Language Learning (Reversed) -->
+            <div class="feature-container reverse">
+                <div class="feature-box">
+                    <img src="./photo/langpractitle.png" alt="Dot Helps You Speak" class="feature-title-img">
+                    <p class="feature-text">
+                        <strong>Dot Helps You Speak with Confidence</strong><br><br>
+                        If you're learning a new language and have no one to practice with, <strong>Dot is here to help</strong>.<br><br>
+                        Choose your target language, and Dot will <strong>talk to you in that language every day</strong>. The more you speak, the more Dot helping you to <strong>build real conversation skills</strong> through natural, friendly interaction.<br><br>
+                        <strong>Current available languages:</strong> English, Spanish, German, Japanese, Mandarin, Thai.
+                    </p>
+                </div>
+                <div class="feature-media">
+                    <img src="./photo/langpracgif.webp" alt="Language Demo" class="feature-gif">
+                </div>
+            </div>
+
+            <!-- Music -->
+            <div class="feature-container">
+                <div class="feature-box">
+                    <img src="./photo/musictitle.png" alt="Relaxing Music" class="feature-title-img">
+                    <p class="feature-text">
+                        Whether you're feeling stressed, having trouble sleeping, or just winding down in normal mode, <strong>pressing Dot's legs will play soothing lullabies</strong> to help you <strong>relax and rest easy</strong>.
+                    </p>
+                </div>
+                <div class="feature-media">
+                    <img src="./photo/musicgif.webp" alt="Music Demo" class="feature-gif">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison-section">
+        <img src="./photo/comparisontitle.avif" alt="Comparison Title" class="comparison-img">
+        <img src="./photo/comparison.avif" alt="Comparison Chart" class="comparison-img">
+    </section>
+
+    <!-- Our Journey Section -->
+    <section class="journey-section">
+        <img src="./photo/ourjourney.png" alt="Our Journey" class="journey-img">
+    </section>
+
+    <!-- Premium Fabric & Easy to Play Section -->
+    <section class="premium-easy-section">
+        <!-- Premium Fabric -->
+        <div class="premium-container">
+            <img src="./photo/premiumfabrictitle.avif" alt="Premium Fabric" class="section-title-img">
+            <img src="./photo/premiumfabricgif.webp" alt="Premium Fabric Demo" class="section-gif">
+            <p class="section-text">
+                Dot is crafted with carefully selected premium, ultra-soft fabrics that are gentle to the touch and built to last. From cuddles to playtime, Dot stays cozy, durable, and perfect for hugs.
+            </p>
+        </div>
+
+        <!-- Easy to Play -->
+        <div class="easy-container">
+            <img src="./photo/easytoplaytitle.avif" alt="Easy to Play" class="section-title-img">
+            <img src="./photo/easytoplaygif.webp" alt="Easy to Play Demo" class="section-gif">
+            <p class="section-text">
+                <strong>A Partner for Every Moment</strong><br><br>
+                Dot is more than a talking plushie, it's your everyday companion.<br><br>
+                <strong>Always ready to chat.</strong> Feeling bored or lonely? Dot keeps the conversation going with stories, jokes, and thoughtful replies.<br><br>
+                <strong>Helps you learn.</strong> Dot can help you practice speaking a new language, work through homework, learn fun facts, or explore new ideas. All in a friendly, easy-to-understand way.<br><br>
+                <strong>Easy to pause.</strong> Just tap the button on Dot's tiny wing to pause when it's talking.<br><br>
+                <strong>Always growing.</strong> With regular Wi-Fi updates, Dot keeps getting smarter, adding new features, stories, games, and ways to connect with other Dots in the future.
+            </p>
+        </div>
+    </section>
+
+    <!-- Specs Section -->
+    <section class="specs-section">
+        <img src="./photo/specstitle.png" alt="Specs Title" class="specs-img">
+        <img src="./photo/specs.avif" alt="Specifications" class="specs-img">
+    </section>
+
+    <!-- Pre-Help Signup Section -->
+    <section class="pre-help-signup-section">
+        <p class="pre-help-signup-text">Sign up and save up to 50% on launch day</p>
+        
+        <!-- MailChimp Form (Second Instance) -->
+        <form action="https://bobadot.us3.list-manage.com/subscribe/post?u=6264709c5542130978ba9ce7d&amp;id=5c0ad2e828&amp;f_id=0090c8e0f0" 
+              method="post" 
+              id="mc-embedded-subscribe-form-2" 
+              name="mc-embedded-subscribe-form-2" 
+              class="validate">
+            
+            <div class="mc-form-wrapper" style="max-width: 500px; margin: 0 auto;">
+                <input type="email" 
+                       name="EMAIL" 
+                       class="mc-email-input" 
+                       style="background: white; color: #333;"
+                       placeholder="Enter your email address" 
+                       required>
+                <button type="submit" 
+                        name="subscribe" 
+                        class="mc-submit-btn">
+                    Signup Now!
+                </button>
+            </div>
+            
+            <!-- Bot protection field (hidden) -->
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                <input type="text" name="b_6264709c5542130978ba9ce7d_5c0ad2e828" tabindex="-1" value="">
+            </div>
+        </form>
+    </section>
+
+    <!-- Help Us Unlock Section - Now with grey background -->
+    <section class="help-section">
+        <img src="./photo/helpusunlock.avif" alt="Help Us Unlock" class="help-img">
+    </section>
+
+    <!-- Follow Us Section -->
+    <section class="follow-section">
+        <img src="./photo/facebooktitle.avif" alt="Facebook" class="follow-img">
+        <img src="./photo/igtitle.avif" alt="Instagram" class="follow-img">
+    </section>
+
+    <!-- Product & Functions Section - NOW FULL WIDTH -->
+    <section class="product-section">
+        <img src="./photo/productandfunctions.avif" alt="Product and Functions" class="product-img">
+    </section>
+
+    <!-- Final Signup Section -->
+    <section class="final-signup-section">
+        <p class="final-signup-text">Sign up and receive up to 50% off on launch day</p>
+        
+        <!-- MailChimp Form (Third Instance) -->
+        <form action="https://bobadot.us3.list-manage.com/subscribe/post?u=6264709c5542130978ba9ce7d&amp;id=5c0ad2e828&amp;f_id=0090c8e0f0" 
+              method="post" 
+              id="mc-embedded-subscribe-form-3" 
+              name="mc-embedded-subscribe-form-3" 
+              class="validate">
+            
+            <div class="mc-form-wrapper" style="max-width: 500px; margin: 0 auto;">
+                <input type="email" 
+                       name="EMAIL" 
+                       class="mc-email-input" 
+                       style="background: rgba(255, 255, 255, 0.9); color: #333;"
+                       placeholder="Enter your email address" 
+                       required>
+                <button type="submit" 
+                        name="subscribe" 
+                        class="mc-submit-btn">
+                    Signup Now!
+                </button>
+            </div>
+            
+            <!-- Bot protection field (hidden) -->
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                <input type="text" name="b_6264709c5542130978ba9ce7d_5c0ad2e828" tabindex="-1" value="">
+            </div>
+        </form>
+    </section>
+
+    <script>
+        // Enhanced form submission handling with Facebook redirect
+        function handleFormSubmit(formId) {
+            const form = document.getElementById(formId);
+            if (!form) return;
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const emailInput = this.querySelector('input[type="email"]');
+                const email = emailInput.value;
+                
+                if (email && email.includes('@')) {
+                    // Submit to MailChimp
+                    fetch(this.action, {
+                        method: 'POST',
+                        body: new FormData(this),
+                        mode: 'no-cors'
+                    }).then(() => {
+                        // Show success message
+                        alert('Thank you for signing up! You\'ll be redirected to our Facebook group.');
+                        
+                        // Clear the form
+                        emailInput.value = '';
+                        
+                        // Redirect to Facebook group
+                        setTimeout(() => {
+                            window.open('https://www.facebook.com/share/g/1C7NHD8eCf/', '_blank');
+                        }, 1000);
+                    }).catch(error => {
+                        console.error('Error:', error);
+                        alert('Thank you for signing up! Join our Facebook group for updates.');
+                        window.open('https://www.facebook.com/share/g/1C7NHD8eCf/', '_blank');
+                    });
+                }
+            });
+        }
+        
+        // Initialize all forms
+        handleFormSubmit('mc-embedded-subscribe-form');
+        handleFormSubmit('mc-embedded-subscribe-form-2');
+        handleFormSubmit('mc-embedded-subscribe-form-3');
+
+        // V13 NEW: Back to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // V13 NEW: Open signup modal
+        function openSignupModal() {
+            document.getElementById('signupModal').style.display = 'flex';
+        }
+
+        // V13 NEW: Close signup modal
+        function closeSignupModal() {
+            document.getElementById('signupModal').style.display = 'none';
+        }
+
+        // V13 NEW: Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('signupModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // V13 NEW: Handle modal form submission
+        document.querySelector('.modal-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const emailInput = this.querySelector('input[type="email"]');
+            const email = emailInput.value;
+            
+            if (email && email.includes('@')) {
+                // Submit to MailChimp
+                fetch(this.action, {
+                    method: 'POST',
+                    body: new FormData(this),
+                    mode: 'no-cors'
+                }).then(() => {
+                    // Show success message
+                    alert('Thank you for signing up! You\'ll be redirected to our Facebook group.');
+                    
+                    // Clear the form and close modal
+                    emailInput.value = '';
+                    closeSignupModal();
+                    
+                    // Redirect to Facebook group
+                    setTimeout(() => {
+                        window.open('https://www.facebook.com/share/g/1C7NHD8eCf/', '_blank');
+                    }, 1000);
+                }).catch(error => {
+                    console.error('Error:', error);
+                    alert('Thank you for signing up! Join our Facebook group for updates.');
+                    closeSignupModal();
+                    window.open('https://www.facebook.com/share/g/1C7NHD8eCf/', '_blank');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
