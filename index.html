@@ -227,14 +227,14 @@
             display: block;
         }
 
-        /* Features Section with Background - FIXED */
+        /* Features Section with Background - FIXED FOR MOBILE */
         .features-section {
             position: relative;
             padding: 100px 20px;
             background-color: #8793eb; /* Fallback color */
         }
 
-        /* Background layer - positioned absolutely behind content */
+        /* Background layer - FIXED for iOS */
         .features-background {
             position: absolute;
             top: 0;
@@ -245,8 +245,26 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-attachment: fixed;
+            /* Removed background-attachment: fixed for iOS compatibility */
             z-index: 0;
+        }
+
+        /* iOS-specific fix using supports query */
+        @supports (-webkit-touch-callout: none) {
+            .features-background {
+                background-attachment: scroll;
+                background-size: cover;
+                background-position: center center;
+            }
+        }
+
+        /* Alternative approach for better mobile support */
+        @media (max-width: 768px) {
+            .features-background {
+                background-attachment: scroll !important;
+                background-size: cover !important;
+                background-position: center !important;
+            }
         }
 
         /* Features content wrapper - positioned above background */
