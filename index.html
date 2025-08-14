@@ -253,8 +253,10 @@
         @supports (-webkit-touch-callout: none) {
             .features-background {
                 background-attachment: scroll;
-                background-size: cover;
-                background-position: center center;
+                /* Use 100% width to ensure full width is always shown */
+                background-size: 100% auto !important;
+                background-position: top center;
+                background-repeat: repeat-y; /* Repeat vertically if needed */
             }
         }
 
@@ -262,8 +264,22 @@
         @media (max-width: 768px) {
             .features-background {
                 background-attachment: scroll !important;
-                background-size: cover !important;
-                background-position: center !important;
+                /* Force full width display on mobile */
+                background-size: 100% auto !important;
+                background-position: top center !important;
+                background-repeat: repeat-y !important; /* Repeat vertically to fill the section */
+            }
+        }
+
+        /* Specific fix for iPhone viewport */
+        @media only screen 
+        and (min-device-width: 375px) 
+        and (max-device-width: 812px) 
+        and (-webkit-min-device-pixel-ratio: 2) {
+            .features-background {
+                background-size: 100% auto !important;
+                background-position: top center !important;
+                background-repeat: repeat-y !important;
             }
         }
 
@@ -625,7 +641,7 @@
                 <div class="feature-box">
                     <img src="./photo/musictitle.png" alt="Relaxing Music" class="feature-title-img">
                     <p class="feature-text">
-                        Whether you're feeling stressed, having trouble sleeping, or just winding down in normal mode, pressing Dot's legs will play soothing lullabies to help you relax and rest easy11.
+                        Whether you're feeling stressed, having trouble sleeping, or just winding down in normal mode, pressing Dot's legs will play soothing lullabies to help you relax and rest easy12.
                     </p>
                 </div>
                 <div class="feature-media">
