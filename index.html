@@ -105,7 +105,7 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        /* MailChimp Form Styling */
+        /* MailChimp Form Styling - FIXED: Removed animation for static button */
         .mc-form-wrapper {
             display: flex;
             align-items: center;
@@ -136,32 +136,15 @@
             cursor: pointer;
             background: linear-gradient(45deg, #FF69B4, #87CEEB, #FF69B4);
             background-size: 200% 200%;
-            animation: breathe 3s ease-in-out infinite;
+            /* Removed animation for static appearance */
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
-        }
-
-        @keyframes breathe {
-            0% { 
-                background-position: 0% 50%;
-                transform: scale(1);
-                box-shadow: 0 5px 20px rgba(255, 105, 180, 0.3);
-            }
-            50% { 
-                background-position: 100% 50%;
-                transform: scale(1.05);
-                box-shadow: 0 8px 30px rgba(135, 206, 235, 0.4);
-            }
-            100% { 
-                background-position: 0% 50%;
-                transform: scale(1);
-                box-shadow: 0 5px 20px rgba(255, 105, 180, 0.3);
-            }
+            box-shadow: 0 5px 20px rgba(255, 105, 180, 0.3);
         }
 
         .mc-submit-btn:hover {
-            transform: scale(1.08) !important;
+            transform: scale(1.08);
             box-shadow: 0 10px 40px rgba(255, 105, 180, 0.6);
         }
 
@@ -190,7 +173,7 @@
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
 
-        /* Meet Dot Section */
+        /* Meet Dot Section - Updated title color */
         .meet-dot-section {
             background: white;
             padding: 80px 20px;
@@ -201,7 +184,7 @@
             font-size: 4rem;
             font-weight: bold;
             margin-bottom: 30px;
-            color: #333;
+            color: #00174f; /* Updated color as requested */
         }
 
         .meet-dot-text {
@@ -225,6 +208,13 @@
             width: 100%;
             height: auto;
             display: block;
+        }
+
+        /* Video poster fix for mobile */
+        video[poster] {
+            object-fit: cover;
+            width: 100%;
+            height: auto;
         }
 
         /* Features Section with Background - FIXED FOR MOBILE */
@@ -338,6 +328,58 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
 
+        /* Journey Section */
+        .journey-section {
+            background: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .journey-img {
+            max-width: 1000px;
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Premium & Easy Section */
+        .premium-easy-section {
+            background: white;
+            padding: 80px 20px;
+        }
+
+        .premium-container, .easy-container {
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            text-align: center;
+        }
+
+        .section-title-img {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            margin: 0 auto 30px;
+            display: block;
+        }
+
+        .section-gif {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            margin: 30px auto;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #555;
+            max-width: 800px;
+            margin: 30px auto;
+        }
+
         /* Comparison Section */
         .comparison-section {
             background: white;
@@ -368,10 +410,24 @@
             display: block;
         }
 
+        /* Pre-Help Signup Section */
+        .pre-help-signup-section {
+            background: #ebebea;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .pre-help-signup-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #00174f;
+        }
+
         /* Help Us Section - Added grey background */
         .help-section {
             background: #ebebea;
-            padding: 80px 20px;
+            padding: 80px 20px 40px;
             text-align: center;
         }
 
@@ -396,6 +452,35 @@
             height: auto;
             margin: 20px auto;
             display: block;
+        }
+
+        /* Product & Functions Section */
+        .product-section {
+            background: #333;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .product-img {
+            max-width: 800px;
+            width: 100%;
+            height: auto;
+            margin: 20px auto;
+            display: block;
+        }
+
+        /* Final Signup Section */
+        .final-signup-section {
+            background: #333;
+            padding: 60px 20px 80px;
+            text-align: center;
+        }
+
+        .final-signup-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: white;
         }
 
         /* Responsive */
@@ -469,8 +554,9 @@
                 font-size: 1.1rem;
             }
 
+            /* MOBILE: GIF/Photo first, then text box */
             .feature-container {
-                flex-direction: column !important;
+                flex-direction: column-reverse !important;
                 gap: 40px;
             }
 
@@ -488,6 +574,11 @@
 
             .feature-gif {
                 max-width: 350px;
+            }
+
+            .pre-help-signup-text,
+            .final-signup-text {
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -520,8 +611,7 @@
                       method="post" 
                       id="mc-embedded-subscribe-form" 
                       name="mc-embedded-subscribe-form" 
-                      class="validate" 
-                      target="_blank">
+                      class="validate">
                     
                     <div class="mc-form-wrapper">
                         <input type="email" 
@@ -563,7 +653,7 @@
             Dot is your talking, thinking, and totally lovable companion, helping you to learn a new language and enjoy fun roleplay as different characters.
         </p>
         <div class="video-container">
-            <video class="video-player" controls poster="./photo/videocover.jpeg">
+            <video class="video-player" controls poster="./photo/videocover.jpeg" preload="metadata">
                 <source src="./video/dotvideo2.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -641,7 +731,7 @@
                 <div class="feature-box">
                     <img src="./photo/musictitle.png" alt="Relaxing Music" class="feature-title-img">
                     <p class="feature-text">
-                        Whether you're feeling stressed, having trouble sleeping, or just winding down in normal mode, pressing Dot's legs will play soothing lullabies to help you relax and rest easy12.
+                        Whether you're feeling stressed, having trouble sleeping, or just winding down in normal mode, pressing Dot's legs will play soothing lullabies to help you relax and rest easy.
                     </p>
                 </div>
                 <div class="feature-media">
@@ -657,10 +747,73 @@
         <img src="./photo/comparison.avif" alt="Comparison Chart" class="comparison-img">
     </section>
 
+    <!-- Our Journey Section -->
+    <section class="journey-section">
+        <img src="./photo/ourjourney.png" alt="Our Journey" class="journey-img">
+    </section>
+
+    <!-- Premium Fabric & Easy to Play Section -->
+    <section class="premium-easy-section">
+        <!-- Premium Fabric -->
+        <div class="premium-container">
+            <img src="./photo/premiumfabrictitle.avif" alt="Premium Fabric" class="section-title-img">
+            <img src="./photo/premiumfabricgif.webp" alt="Premium Fabric Demo" class="section-gif">
+            <p class="section-text">
+                Dot is crafted with carefully selected premium, ultra-soft fabrics that are gentle to the touch and built to last. From cuddles to playtime, Dot stays cozy, durable, and perfect for hugs.
+            </p>
+        </div>
+
+        <!-- Easy to Play -->
+        <div class="easy-container">
+            <img src="./photo/easytoplaytitle.avif" alt="Easy to Play" class="section-title-img">
+            <img src="./photo/easytoplaygif.webp" alt="Easy to Play Demo" class="section-gif">
+            <p class="section-text">
+                <strong>A Partner for Every Moment</strong><br><br>
+                Dot is more than a talking plushie, it's your everyday companion.<br><br>
+                <strong>Always ready to chat.</strong> Feeling bored or lonely? Dot keeps the conversation going with stories, jokes, and thoughtful replies.<br><br>
+                <strong>Helps you learn.</strong> Dot can help you practice speaking a new language, work through homework, learn fun facts, or explore new ideas. All in a friendly, easy-to-understand way.<br><br>
+                <strong>Easy to pause.</strong> Just tap the button on Dot's tiny wing to pause when it's talking.<br><br>
+                <strong>Always growing.</strong> With regular Wi-Fi updates, Dot keeps getting smarter, adding new features, stories, games, and ways to connect with other Dots in the future.
+            </p>
+        </div>
+    </section>
+
     <!-- Specs Section -->
     <section class="specs-section">
         <img src="./photo/specstitle.png" alt="Specs Title" class="specs-img">
         <img src="./photo/specs.avif" alt="Specifications" class="specs-img">
+    </section>
+
+    <!-- Pre-Help Signup Section -->
+    <section class="pre-help-signup-section">
+        <p class="pre-help-signup-text">Sign up and save up to 50% on launch day</p>
+        
+        <!-- MailChimp Form (Second Instance) -->
+        <form action="https://bobadot.us3.list-manage.com/subscribe/post?u=6264709c5542130978ba9ce7d&amp;id=5c0ad2e828&amp;f_id=0090c8e0f0" 
+              method="post" 
+              id="mc-embedded-subscribe-form-2" 
+              name="mc-embedded-subscribe-form-2" 
+              class="validate">
+            
+            <div class="mc-form-wrapper" style="max-width: 500px; margin: 0 auto;">
+                <input type="email" 
+                       name="EMAIL" 
+                       class="mc-email-input" 
+                       style="background: white; color: #333;"
+                       placeholder="Enter your email address" 
+                       required>
+                <button type="submit" 
+                        name="subscribe" 
+                        class="mc-submit-btn">
+                    Signup Now!
+                </button>
+            </div>
+            
+            <!-- Bot protection field (hidden) -->
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                <input type="text" name="b_6264709c5542130978ba9ce7d_5c0ad2e828" tabindex="-1" value="">
+            </div>
+        </form>
     </section>
 
     <!-- Help Us Unlock Section - Now with grey background -->
@@ -671,74 +824,46 @@
     <!-- Follow Us Section -->
     <section class="follow-section">
         <img src="./photo/facebooktitle.avif" alt="Facebook" class="follow-img">
+        <img src="./photo/igtitle.avif" alt="Instagram" class="follow-img">
+    </section>
+
+    <!-- Product & Functions Section -->
+    <section class="product-section">
+        <img src="./photo/productandfunctions.avif" alt="Product and Functions" class="product-img">
+    </section>
+
+    <!-- Final Signup Section -->
+    <section class="final-signup-section">
+        <p class="final-signup-text">Sign up and receive up to 50% off on launch day</p>
+        
+        <!-- MailChimp Form (Third Instance) -->
+        <form action="https://bobadot.us3.list-manage.com/subscribe/post?u=6264709c5542130978ba9ce7d&amp;id=5c0ad2e828&amp;f_id=0090c8e0f0" 
+              method="post" 
+              id="mc-embedded-subscribe-form-3" 
+              name="mc-embedded-subscribe-form-3" 
+              class="validate">
+            
+            <div class="mc-form-wrapper" style="max-width: 500px; margin: 0 auto;">
+                <input type="email" 
+                       name="EMAIL" 
+                       class="mc-email-input" 
+                       style="background: rgba(255, 255, 255, 0.9); color: #333;"
+                       placeholder="Enter your email address" 
+                       required>
+                <button type="submit" 
+                        name="subscribe" 
+                        class="mc-submit-btn">
+                    Signup Now!
+                </button>
+            </div>
+            
+            <!-- Bot protection field (hidden) -->
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                <input type="text" name="b_6264709c5542130978ba9ce7d_5c0ad2e828" tabindex="-1" value="">
+            </div>
+        </form>
     </section>
 
     <script>
-        // Enhanced form submission handling
-        const form = document.getElementById('mc-embedded-subscribe-form');
-        const successMsg = document.getElementById('mce-success-response');
-        const errorMsg = document.getElementById('mce-error-response');
-        
-        // Handle form submission with AJAX (optional - for better UX)
-        form.addEventListener('submit', function(e) {
-            // The form will still submit to MailChimp in a new tab
-            // This just adds a nice confirmation message
-            setTimeout(() => {
-                const email = document.getElementById('mce-EMAIL').value;
-                if (email) {
-                    // Show success message
-                    successMsg.textContent = 'Thank you for signing up! Please check the new tab to complete your subscription.';
-                    successMsg.style.display = 'block';
-                    errorMsg.style.display = 'none';
-                    
-                    // Clear the form
-                    form.reset();
-                    
-                    // Hide message after 5 seconds
-                    setTimeout(() => {
-                        successMsg.style.display = 'none';
-                    }, 5000);
-                }
-            }, 500);
-        });
-
-        // Smooth scroll behavior
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Video play on click
-        const video = document.querySelector('.video-player');
-        if (video) {
-            video.addEventListener('click', function() {
-                if (video.paused) {
-                    video.play();
-                } else {
-                    video.pause();
-                }
-            });
-        }
-    </script>
-
-    <!-- MailChimp form validation script -->
-    <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
-    <script type="text/javascript">
-        (function($) {
-            window.fnames = new Array(); 
-            window.ftypes = new Array();
-            fnames[0]='EMAIL';
-            ftypes[0]='email';
-        }(jQuery));
-        var $mcj = jQuery.noConflict(true);
-    </script>
-</body>
-</html>
+        // Enhanced form submission handling with Facebook redirect
+        function
