@@ -351,7 +351,7 @@
             margin: 0 auto 50px;
         }
 
-        /* V15 UPDATE: YouTube embed container */
+        /* V16 FIX: Improved YouTube embed container for proper 16:9 on desktop */
         .video-container {
             max-width: 800px;
             margin: 0 auto;
@@ -359,11 +359,18 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
+            background: #000; /* Add background for loading state */
         }
 
-        .video-container iframe {
+        /* V16 FIX: Proper responsive 16:9 wrapper */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio = 9/16 = 0.5625 */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -921,14 +928,16 @@
             Remember your favorite toy as a kid? What if it could talk, listen, and become your real-life buddy?<br><br>
             Dot is your talking, thinking, and totally lovable companion, helping you to learn a new language and enjoy fun roleplay as different characters.
         </p>
-        <!-- V15 UPDATE: YouTube embed instead of video -->
+        <!-- V16 FIX: Improved YouTube embed structure for proper 16:9 -->
         <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/F-TVV42dvs0" 
-                    title="Dot Video" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    allowfullscreen>
-            </iframe>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/F-TVV42dvs0" 
+                        title="Dot Video" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                </iframe>
+            </div>
         </div>
     </section>
 
