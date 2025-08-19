@@ -194,6 +194,40 @@
             box-shadow: 0 5px 20px rgba(255, 105, 180, 0.4);
         }
 
+        /* Loading Spinner Styles - NEW */
+        .loading-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #02406f;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            color: #02406f;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .form-container {
+            display: none;
+        }
+
         /* Hero Section - Updated for full width */
         .hero-section {
             margin-top: 80px;
@@ -880,24 +914,34 @@ src="https://www.facebook.com/tr?id=1289091789237455&ev=PageView&noscript=1"
     <div class="mobile-signup-modal" id="signupModal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeSignupModal()">&times;</span>
-            <h3 class="modal-title">Sign up to get notified when launch and reserve a BobaDot</h3>
-            <form action="https://bobadot.us3.list-manage.com/subscribe/post?u=6264709c5542130978ba9ce7d&amp;id=5c0ad2e828&amp;f_id=0090c8e0f0" 
-                  method="post" 
-                  class="modal-form">
-                <input type="email" 
-                       name="EMAIL" 
-                       class="modal-email-input" 
-                       placeholder="Enter your email address" 
-                       required>
-                <button type="submit" 
-                        class="modal-submit-btn">
-                    Sign Up
-                </button>
-                <!-- Bot protection field (hidden) -->
-                <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                    <input type="text" name="b_6264709c5542130978ba9ce7d_5c0ad2e828" tabindex="-1" value="">
-                </div>
-            </form>
+            
+            <!-- Loading Container - NEW -->
+            <div class="loading-container" id="loadingContainer">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">Loading...</div>
+            </div>
+            
+            <!-- Form Container - Initially hidden -->
+            <div class="form-container" id="formContainer">
+                <h3 class="modal-title">Sign up to get notified when launch and reserve a BobaDot</h3>
+                <form action="https://bobadot.us3.list-manage.com/subscribe/post?u=6264709c5542130978ba9ce7d&amp;id=5c0ad2e828&amp;f_id=0090c8e0f0" 
+                      method="post" 
+                      class="modal-form">
+                    <input type="email" 
+                           name="EMAIL" 
+                           class="modal-email-input" 
+                           placeholder="Enter your email address" 
+                           required>
+                    <button type="submit" 
+                            class="modal-submit-btn">
+                        Sign Up
+                    </button>
+                    <!-- Bot protection field (hidden) -->
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                        <input type="text" name="b_6264709c5542130978ba9ce7d_5c0ad2e828" tabindex="-1" value="">
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -1270,9 +1314,24 @@ src="https://www.facebook.com/tr?id=1289091789237455&ev=PageView&noscript=1"
             });
         }
 
-        // V13 NEW: Open signup modal
+        // UPDATED: Open signup modal with loading animation
         function openSignupModal() {
-            document.getElementById('signupModal').style.display = 'flex';
+            const modal = document.getElementById('signupModal');
+            const loadingContainer = document.getElementById('loadingContainer');
+            const formContainer = document.getElementById('formContainer');
+            
+            // Reset state - show loading, hide form
+            loadingContainer.style.display = 'flex';
+            formContainer.style.display = 'none';
+            
+            // Show modal
+            modal.style.display = 'flex';
+            
+            // After 0.5 seconds, show the form
+            setTimeout(() => {
+                loadingContainer.style.display = 'none';
+                formContainer.style.display = 'block';
+            }, 500);
         }
 
         // V13 NEW: Close signup modal
