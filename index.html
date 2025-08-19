@@ -396,6 +396,12 @@
             background: #000; /* Add background for loading state */
         }
 
+        .video-player {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
         /* V16 FIX: Proper responsive 16:9 wrapper */
         .video-wrapper {
             position: relative;
@@ -1011,12 +1017,10 @@ src="https://www.facebook.com/tr?id=1289091789237455&ev=PageView&noscript=1"
         <!-- V16 FIX: Improved YouTube embed structure for proper 16:9 -->
         <div class="video-container">
             <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/F-TVV42dvs0?autoplay=1&mute=1" 
-                        title="Dot Video" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen>
-                </iframe>
+                <video class="video-player" controls autoplay muted playsinline poster="">
+                    <source src="./video/dotvideo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
         </div>
     </section>
