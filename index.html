@@ -396,12 +396,6 @@
             background: #000; /* Add background for loading state */
         }
 
-        .video-player {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
         /* V16 FIX: Proper responsive 16:9 wrapper */
         .video-wrapper {
             position: relative;
@@ -1017,10 +1011,12 @@ src="https://www.facebook.com/tr?id=1289091789237455&ev=PageView&noscript=1"
         <!-- V16 FIX: Improved YouTube embed structure for proper 16:9 -->
         <div class="video-container">
             <div class="video-wrapper">
-                <video class="video-player" muted playsinline loop>
-                <source src="./video/dotvideo.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-                </video>
+                <iframe src="https://www.youtube.com/embed/F-TVV42dvs0?autoplay=1&mute=1" 
+                        title="Dot Video" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                </iframe>
             </div>
         </div>
     </section>
@@ -1466,25 +1462,6 @@ src="https://www.facebook.com/tr?id=1289091789237455&ev=PageView&noscript=1"
                 window.open(instagramUrl, '_blank');
             }
         }
-
-
-
-        const videos = document.querySelectorAll('.video-player');
-
-        const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-            entry.target.play().catch(() => {
-                // autoplay might fail without mute
-            });
-            } else {
-            entry.target.pause();
-            }
-        });
-        }, { threshold: 0.5 }); // play when 50% visible
-
-        videos.forEach(video => observer.observe(video));
-
     </script>
 </body>
 </html>
